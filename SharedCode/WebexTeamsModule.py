@@ -56,6 +56,7 @@ class WebexTeams():
         # delete existing webhooks
         for wh in existing_webhooks.arguments['self'].list():
             self.api.webhooks.delete(wh.id)
+            sleep(1)
 
         # message create webhook
         webhook_name = 'DNAC Bot Message Created'
