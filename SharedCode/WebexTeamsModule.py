@@ -353,7 +353,15 @@ class WebexTeams():
                         }
                     }
                 ],
-                'actions': []
+                'actions': [
+                                        {
+                        'type': 'Action.Submit',
+                        'title': 'Home',
+                        'data': {
+                            'next_action': 'Home'
+                        }
+                    }
+                ]
             }
         }
 
@@ -436,7 +444,15 @@ class WebexTeams():
                 'type': 'AdaptiveCard',
                 'version': '1.2',
                 'body': body,
-                'actions': []
+                'actions': [
+                                        {
+                        'type': 'Action.Submit',
+                        'title': 'Home',
+                        'data': {
+                            'next_action': 'Home'
+                        }
+                    }
+                ]
             }
         }
 
