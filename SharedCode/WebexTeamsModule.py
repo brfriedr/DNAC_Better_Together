@@ -309,6 +309,13 @@ class WebexTeams():
                             ],
                             'actions': []
                         }
+                    },
+                    {
+                        'type': 'Action.Submit',
+                        'title': 'Home',
+                        'data': {
+                            'next_action': 'Home'
+                    }
                     }
                 ]
             }
