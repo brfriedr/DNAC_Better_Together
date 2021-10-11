@@ -189,6 +189,13 @@ class WebexTeams():
                         'data': {
                             'next_action': 'get_device_config'
                         }
+                    },
+                    {
+                        'type': 'Action.Submit',
+                        'title': 'Home',
+                        'data': {
+                            'next_action': 'Home'
+                        }
                     }
                 ]
             }

@@ -125,6 +125,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
+            elif action.inputs.get('next_action') == 'Home':
+
+                # send the default card
+                teams_api.send_default_card(person_email=person_email)
+
+                return func.HttpResponse('Done', mimetype='text/html')
+
             return func.HttpResponse('Done', mimetype='text/html')
 
     except Exception as e:
