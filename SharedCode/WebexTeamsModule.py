@@ -315,7 +315,7 @@ class WebexTeams():
                         'title': 'Home',
                         'data': {
                             'next_action': 'Home'
-                    }
+                        }
                     }
                 ]
             }
@@ -354,7 +354,7 @@ class WebexTeams():
                     }
                 ],
                 'actions': [
-                                        {
+                    {
                         'type': 'Action.Submit',
                         'title': 'Home',
                         'data': {
@@ -445,7 +445,7 @@ class WebexTeams():
                 'version': '1.2',
                 'body': body,
                 'actions': [
-                                        {
+                    {
                         'type': 'Action.Submit',
                         'title': 'Home',
                         'data': {
