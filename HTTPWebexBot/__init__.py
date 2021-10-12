@@ -66,7 +66,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
             room_id = data['data']['roomId']
 
-
             if '@cisco.com' not in person_email:
                 logger.warning(f'Message was not from a Cisco person: {person_email}')
                 return func.HttpResponse(f'Message was not from a Cisco person: {person_email}', mimetype='text/html')
