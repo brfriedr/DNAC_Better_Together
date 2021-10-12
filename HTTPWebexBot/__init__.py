@@ -97,6 +97,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 teams_api.send_device_config(config=config, room_id=room_id)
 
+                teams_api.send_default_card(room_id=room_id)
+
                 return func.HttpResponse('Done', mimetype='text/html')
 
             elif action.inputs.get('next_action') == 'run_command':
