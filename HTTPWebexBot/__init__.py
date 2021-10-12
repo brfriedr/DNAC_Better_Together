@@ -33,6 +33,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if data['resource'] == 'messages' and data['event'] == 'created':
 
             person_email = data['data']['personEmail']
+            room_id = data['data']['roomId']
 
             if '@webex.bot' in person_email:
                 return func.HttpResponse(f'Message was from a bot: {person_email}', mimetype='text/html')
@@ -44,7 +45,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             teams_api = WebexTeams(environ['WEBEX_TEAMS_ACCESS_TOKEN'])
 
             # send the default card
-            teams_api.send_default_card(person_email=person_email)
+            teams_api.send_default_card(room_id=room_id)
 
             return func.HttpResponse('Done', mimetype='text/html')
 
@@ -63,6 +64,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
             person = teams_api.api.people.get(action.personId)
             person_email = person.emails[0]
 
+            room_id = data['data']['roomId']
+
+
             if '@cisco.com' not in person_email:
                 logger.warning(f'Message was not from a Cisco person: {person_email}')
                 return func.HttpResponse(f'Message was not from a Cisco person: {person_email}', mimetype='text/html')
@@ -75,7 +79,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 device_list = dnac_api.get_devices_for_card()
 
-                teams_api.send_device_list_card(device_list=device_list, person_email=person_email)
+                teams_api.send_device_list_card(device_list=device_list, room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
@@ -83,7 +87,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 details = dnac_api.get_device_details_for_card(d_id=action.inputs.get('device_choice'))
 
-                teams_api.send_device_details_card(details=details, person_email=person_email)
+                teams_api.send_device_details_card(details=details, room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
@@ -91,7 +95,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 config = dnac_api.get_device_config_for_card(d_id=action.inputs.get('device_choice'))
 
-                teams_api.send_device_config(config=config, person_email=person_email)
+                teams_api.send_device_config(config=config, room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
@@ -103,13 +107,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 result = dnac_api.run_command_on_device(d_id, command)
 
                 if result:
-                    teams_api.send_message(markdown=result, person_email=person_email)
+                    teams_api.send_message(markdown=result, room_id=room_id)
                 else:
-                    teams_api.send_message(markdown='Command unsuccessful', person_email=person_email)
+                    teams_api.send_message(markdown='Command unsuccessful', room_id=room_id)
 
                 # resend the details card
                 details = dnac_api.get_device_details_for_card(d_id=action.inputs.get('device_choice'))
-                teams_api.send_device_command_card(details=details, person_email=person_email)
+                teams_api.send_device_command_card(details=details, room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
@@ -121,14 +125,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 issues = dnac_api.get_issues_for_card(priority=priority)[:max_issues - 1]
 
                 teams_api.send_issue_list_card(
-                    text=f'{priority.upper()} issues:', issue_list=issues, person_email=person_email)
+                    text=f'{priority.upper()} issues:', issue_list=issues, room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
             elif action.inputs.get('next_action') == 'Home':
 
                 # send the default card
-                teams_api.send_default_card(person_email=person_email)
+                teams_api.send_default_card(room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
