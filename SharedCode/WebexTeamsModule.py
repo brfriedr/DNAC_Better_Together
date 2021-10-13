@@ -7,7 +7,6 @@ from webexteamssdk import WebexTeamsAPI
 
 logger = logging.getLogger()
 
-
 class WebexTeams():
 
     def __init__(self, access_token):
@@ -103,28 +102,28 @@ class WebexTeams():
                             'next_action': 'list_devices'
                         }
                     },
-                    # {
-                    #     'type': 'Action.ShowCard',
-                    #     'title': 'User Health',
-                    #     'card': {
-                    #         'type': 'AdaptiveCard',
-                    #         'body': [
-                    #             {
-                    #                 'type': 'Input.Text',
-                    #                 'id': 'username_input',
-                    #                 'placeholder': 'Enter username',
-                    #                 'inlineAction': {
-                    #                     'type': 'Action.Submit',
-                    #                     'title': 'Enter',
-                    #                     'data': {
-                    #                         'next_action': 'user_enrichment'
-                    #                     }
-                    #                 }
-                    #             }
-                    #         ],
-                    #         'actions': []
-                    #     }
-                    # }
+                    {
+                        'type': 'Action.ShowCard',
+                        'title': 'User Health',
+                        'card': {
+                            'type': 'AdaptiveCard',
+                            'body': [
+                                {
+                                    'type': 'Input.Text',
+                                    'id': 'username_input',
+                                    'placeholder': 'Enter username',
+                                    'inlineAction': {
+                                        'type': 'Action.Submit',
+                                        'title': 'Enter',
+                                        'data': {
+                                            'next_action': 'user_enrichment'
+                                        }
+                                    }
+                                }
+                            ],
+                            'actions': []
+                        }
+                    },
                     {
                         'type': 'Action.Submit',
                         'title': 'P1 Issues',
@@ -427,6 +426,59 @@ class WebexTeams():
                 'wrap': True
             } for x in issue_list
         ]
+
+        body.insert(0, {
+                'type': 'TextBlock',
+                'text': text,
+                'size': 'Medium',
+                'weight': 'Bolder',
+                'wrap': True
+            }
+        )
+
+        card = {
+            'contentType': 'application/vnd.microsoft.card.adaptive',
+            'content': {
+                '$schema': 'http://adaptivecards.io/schemas/adaptive-card.json',
+                'type': 'AdaptiveCard',
+                'version': '1.2',
+                'body': body,
+                'actions': [
+                    {
+                        'type': 'Action.Submit',
+                        'title': 'Home',
+                        'data': {
+                            'next_action': 'Home'
+                        }
+                    }
+                ]
+            }
+        }
+
+        self.send_message('Issues Card', person_email=person_email, room_id=room_id, attachments=[card])
+
+    def send_user_health_card(self, text=None, username=None, health_list=[], person_email=None, room_id=None):
+
+        if text is None:
+            text = 'Health Score For: ' + username
+
+        body = []
+        for x in health_list:
+            connectionStatus = x['userDetails']['connectionStatus']
+            if connectionStatus == 'CONNECTED':
+                hostname = x['userDetails']['hostName']
+                health_score = x['userDetails']['healthScore']
+                for y in health_score:
+                    health_type = y["healthType"]
+                    if health_type == 'OVERALL':
+                        score = y["score"]
+                body.append(
+                    {
+                     'type': 'TextBlock',
+                     'text': f"- [{hostname} has a score of {score}](https://10.91.43.70/dna/assurance/user/details?userId={username})",
+                     'wrap': True
+                    }
+                )
 
         body.insert(0, {
                 'type': 'TextBlock',

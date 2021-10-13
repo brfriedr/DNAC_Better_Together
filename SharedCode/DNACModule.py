@@ -81,7 +81,7 @@ class DNAC():
 
         d = self.api.users.get_user_enrichment_details({'entity_type': 'network_user_id', 'entity_value': username})
 
-        return d[0]
+        return d
 
     def get_issues_for_card(self, priority=None):
         """

@@ -7,6 +7,7 @@ import json
 import logging
 import traceback
 from os import environ
+from pprint import pprint
 
 import azure.functions as func
 import requests
@@ -127,6 +128,16 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 teams_api.send_issue_list_card(
                     text=f'{priority.upper()} issues:', issue_list=issues, room_id=room_id)
+
+                return func.HttpResponse('Done', mimetype='text/html')
+
+            elif action.inputs.get('next_action') == 'user_enrichment':
+
+                username = action.json_data['inputs']['username_input']
+
+                health_list = dnac_api.get_user_enrichment_for_card(username=username)
+
+                teams_api.send_user_health_card(username=username, health_list=health_list, room_id=room_id)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
