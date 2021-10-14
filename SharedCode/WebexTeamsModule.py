@@ -1,9 +1,12 @@
 import logging
 from time import sleep
+from dnacentersdk.environment import DNA_CENTER_BASE_URL
+import re 
 
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from webexteamssdk import WebexTeamsAPI
+
 
 logger = logging.getLogger()
 
@@ -207,6 +210,7 @@ class WebexTeams():
         if text is None:
             text = details['hostname']
 
+
         card = {
             'contentType': 'application/vnd.microsoft.card.adaptive',
             'content': {
@@ -216,7 +220,7 @@ class WebexTeams():
                 'body': [
                     {
                         'type': 'TextBlock',
-                        'text': text,
+                        'text': f"[{text}](https://{DNA_CENTER_BASE_URL}/dna/provision/devices/inventory/device-details?deviceId={details['id']})",
                         'size': 'Medium',
                         'weight': 'Bolder',
                         'wrap': True
@@ -475,7 +479,7 @@ class WebexTeams():
                 body.append(
                     {
                      'type': 'TextBlock',
-                     'text': f"- [{hostname} has a score of {score}](https://10.91.43.70/dna/assurance/user/details?userId={username})",
+                     'text': f"- [{hostname} has a score of {score}](https://{DNA_CENTER_BASE_URL}/dna/assurance/user/details?userId={username})",
                      'wrap': True
                     }
                 )

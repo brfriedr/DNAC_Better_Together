@@ -3,6 +3,7 @@ import logging
 from json import JSONDecodeError
 from os import environ
 from time import sleep
+from pprint import pprint
 
 from dnacentersdk import DNACenterAPI
 from dnacentersdk.exceptions import ApiError
@@ -32,6 +33,8 @@ class DNAC():
     def get_device_details_for_card(self, d_id):
 
         d = self.api.devices.get_device_by_id(d_id)
+
+        pprint (d['response'])
 
         return d['response']
 

@@ -7,7 +7,7 @@ import json
 import logging
 import traceback
 from os import environ
-from pprint import pprint
+
 
 import azure.functions as func
 import requests
