@@ -20,7 +20,7 @@ except ImportError:
     from ..SharedCode.WebexTeamsModule import WebexTeams
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest) -> func.HttpResponse:  # sourcery no-metrics skip: extract-method
 
     logger = logging.getLogger()
     log_level = logging.getLevelName(environ['logging_level'])
@@ -87,7 +87,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 details = dnac_api.get_device_details_for_card(d_id=action.inputs.get('device_choice'))
 
-                teams_api.send_device_details_card(details=details, room_id=room_id)
+                teams_api.send_device_details_card(details=details, room_id=room_id, dnac_url=dnac_api.api.base_url)
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
@@ -137,7 +137,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
                 health_list = dnac_api.get_user_enrichment_for_card(username=username)
 
-                teams_api.send_user_health_card(username=username, health_list=health_list, room_id=room_id)
+                teams_api.send_user_health_card(username=username, health_list=health_list, room_id=room_id, dnac_url=dnac_api.api.base_url)  # noqa: E501
 
                 return func.HttpResponse('Done', mimetype='text/html')
 

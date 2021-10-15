@@ -1,13 +1,12 @@
 import logging
 from time import sleep
-from dnacentersdk.environment import DNA_CENTER_BASE_URL
-
 import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from webexteamssdk import WebexTeamsAPI
 
 
 logger = logging.getLogger()
+
 
 class WebexTeams():
 
@@ -104,28 +103,28 @@ class WebexTeams():
                             'next_action': 'list_devices'
                         }
                     },
-                    # {
-                    #     'type': 'Action.ShowCard',
-                    #     'title': 'User Health',
-                    #     'card': {
-                    #         'type': 'AdaptiveCard',
-                    #         'body': [
-                    #             {
-                    #                 'type': 'Input.Text',
-                    #                 'id': 'username_input',
-                    #                 'placeholder': 'Enter username',
-                    #                 'inlineAction': {
-                    #                     'type': 'Action.Submit',
-                    #                     'title': 'Enter',
-                    #                     'data': {
-                    #                         'next_action': 'user_enrichment'
-                    #                     }
-                    #                 }
-                    #             }
-                    #         ],
-                    #         'actions': []
-                    #     }
-                    # },
+                    {
+                        'type': 'Action.ShowCard',
+                        'title': 'User Health',
+                        'card': {
+                            'type': 'AdaptiveCard',
+                            'body': [
+                                {
+                                    'type': 'Input.Text',
+                                    'id': 'username_input',
+                                    'placeholder': 'Enter username',
+                                    'inlineAction': {
+                                        'type': 'Action.Submit',
+                                        'title': 'Enter',
+                                        'data': {
+                                            'next_action': 'user_enrichment'
+                                        }
+                                    }
+                                }
+                            ],
+                            'actions': []
+                        }
+                    },
                     {
                         'type': 'Action.Submit',
                         'title': 'P1 Issues',
@@ -204,11 +203,10 @@ class WebexTeams():
 
         self.send_message('Devices Card', person_email=person_email, room_id=room_id, attachments=[card])
 
-    def send_device_details_card(self, text=None, details={}, person_email=None, room_id=None):
+    def send_device_details_card(self, text=None, details={}, person_email=None, room_id=None, dnac_url=None):
 
         if text is None:
             text = details['hostname']
-
 
         card = {
             'contentType': 'application/vnd.microsoft.card.adaptive',
@@ -219,7 +217,7 @@ class WebexTeams():
                 'body': [
                     {
                         'type': 'TextBlock',
-                        'text': f"[{text}](https://{DNA_CENTER_BASE_URL}/dna/provision/devices/inventory/device-details?deviceId={details['id']})",
+                        'text': f"[{text}]({dnac_url}/dna/provision/devices/inventory/device-details?deviceId={details['id']})",  # noqa :E501
                         'size': 'Medium',
                         'weight': 'Bolder',
                         'wrap': True
@@ -418,6 +416,7 @@ class WebexTeams():
                 f'Exception occurred while trying to send message: {e}')
 
     def send_issue_list_card(self, text=None, issue_list=[], person_email=None, room_id=None):
+        # sourcery skip: class-extract-method
 
         if text is None:
             text = 'Issues:'
@@ -460,7 +459,8 @@ class WebexTeams():
 
         self.send_message('Issues Card', person_email=person_email, room_id=room_id, attachments=[card])
 
-    def send_user_health_card(self, text=None, username=None, health_list=[], person_email=None, room_id=None):
+    def send_user_health_card(
+            self, text=None, username=None, health_list=[], person_email=None, room_id=None, dnac_url=None):
 
         if text is None:
             text = 'Health Score For: ' + username
@@ -478,7 +478,7 @@ class WebexTeams():
                 body.append(
                     {
                      'type': 'TextBlock',
-                     'text': f"- [{hostname} has a score of {score}](https://{DNA_CENTER_BASE_URL}/dna/assurance/user/details?userId={username})",
+                     'text': f"- [{hostname} has a score of {score}]({dnac_url}/dna/assurance/user/details?userId={username})",  # noqa :E501
                      'wrap': True
                     }
                 )
