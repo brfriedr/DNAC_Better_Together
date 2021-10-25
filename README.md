@@ -155,4 +155,4 @@ Here is a link to the Cisco DNA Center Devnet Learning Lab to learn how to lever
 
 # License
 
-This project is licensed to you under the terms of the [Cisco Sample Code License.](https://github.com/brfriedr/DNAC_Better_Together_BOT/blob/origin/main/LICENSE)
+This project is licensed to you under the terms of the [Cisco Sample Code License.](https://github.com/brfriedr/DNAC_Better_Together/blob/master/LICENSE)
