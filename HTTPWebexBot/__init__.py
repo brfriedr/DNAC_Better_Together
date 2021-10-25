@@ -131,15 +131,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:  # sourcery no-metrics ski
 
                 return func.HttpResponse('Done', mimetype='text/html')
 
-            elif action.inputs.get('next_action') == 'user_enrichment':
+            # elif action.inputs.get('next_action') == 'user_enrichment':
 
-                username = action.json_data['inputs']['username_input']
+            #     username = action.json_data['inputs']['username_input']
 
-                health_list = dnac_api.get_user_enrichment_for_card(username=username)
+            #     health_list = dnac_api.get_user_enrichment_for_card(username=username)
 
-                teams_api.send_user_health_card(username=username, health_list=health_list, room_id=room_id, dnac_url=dnac_api.api.base_url)  # noqa: E501
+            #     teams_api.send_user_health_card(username=username, health_list=health_list, room_id=room_id, dnac_url=dnac_api.api.base_url)  # noqa: E501
 
-                return func.HttpResponse('Done', mimetype='text/html')
+            #     return func.HttpResponse('Done', mimetype='text/html')
 
             elif action.inputs.get('next_action') == 'Home':
 

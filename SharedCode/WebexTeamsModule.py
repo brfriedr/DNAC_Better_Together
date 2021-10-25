@@ -103,28 +103,28 @@ class WebexTeams():
                             'next_action': 'list_devices'
                         }
                     },
-                    {
-                        'type': 'Action.ShowCard',
-                        'title': 'User Health',
-                        'card': {
-                            'type': 'AdaptiveCard',
-                            'body': [
-                                {
-                                    'type': 'Input.Text',
-                                    'id': 'username_input',
-                                    'placeholder': 'Enter username',
-                                    'inlineAction': {
-                                        'type': 'Action.Submit',
-                                        'title': 'Enter',
-                                        'data': {
-                                            'next_action': 'user_enrichment'
-                                        }
-                                    }
-                                }
-                            ],
-                            'actions': []
-                        }
-                    },
+                    # {
+                    #     'type': 'Action.ShowCard',
+                    #     'title': 'User Health',
+                    #     'card': {
+                    #         'type': 'AdaptiveCard',
+                    #         'body': [
+                    #             {
+                    #                 'type': 'Input.Text',
+                    #                 'id': 'username_input',
+                    #                 'placeholder': 'Enter username',
+                    #                 'inlineAction': {
+                    #                     'type': 'Action.Submit',
+                    #                     'title': 'Enter',
+                    #                     'data': {
+                    #                         'next_action': 'user_enrichment'
+                    #                     }
+                    #                 }
+                    #             }
+                    #         ],
+                    #         'actions': []
+                    #     }
+                    # },
                     {
                         'type': 'Action.Submit',
                         'title': 'P1 Issues',

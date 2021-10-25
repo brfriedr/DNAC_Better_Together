@@ -1,0 +1,10 @@
+{
+  "logging_level": "INFO",
+  "other_modules_logging_level": "WARNING",
+  "WEBEX_TEAMS_ACCESS_TOKEN": "BOT_ACCESS_TOKEN",
+  "WEBEX_TEAMS_WEBHOOK_URL": "BOT_URL",
+  "DNA_CENTER_BASE_URL": "https://sandboxdnac.cisco.com:443",
+  "DNA_CENTER_USERNAME": "devnetuser",
+  "DNA_CENTER_PASSWORD": "Cisco123!",
+  "DNA_CENTER_VERIFY": "False"
+}
