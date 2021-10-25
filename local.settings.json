@@ -1,0 +1,19 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "logging_level": "INFO",
+    "other_modules_logging_level": "WARNING",
+    "WEBEX_TEAMS_ACCESS_TOKEN": "Bot_Access_Token",
+    "WEBEX_TEAMS_WEBHOOK_URL": "BOT_URL",
+    "AzureWebJobsStorage": "Azure_Web_Storage",
+    "FUNCTIONS_EXTENSION_VERSION": "~3",
+    "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "Azure_Content_Connection_String",
+    "WEBSITE_CONTENTSHARE": "Azure_Content_Share",
+    "DNA_CENTER_BASE_URL": "https://sandboxdnac.cisco.com:443",
+    "DNA_CENTER_USERNAME": "devnetuser",
+    "DNA_CENTER_PASSWORD": "Cisco123!",
+    "DNA_CENTER_VERIFY": "False",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "295afcd0-dc69-4eb4-85dc-7ec19d3e529f"
+  }
+}
