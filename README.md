@@ -81,15 +81,10 @@ Update local.settings.json to run via Azure Function
         "other_modules_logging_level": "WARNING",
         "WEBEX_TEAMS_ACCESS_TOKEN": "Webex_Access_Token",
         "WEBEX_TEAMS_WEBHOOK_URL": "Webex_BOT_URL",
-        "AzureWebJobsStorage": "Azure_Job_Storage_URL",
-        "FUNCTIONS_EXTENSION_VERSION": "~3",
-        "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING": "Azure_Connection_String",
-        "WEBSITE_CONTENTSHARE": "Azure_Content_Share",
         "DNA_CENTER_BASE_URL": "https://sandboxdnac.cisco.com:443",
         "DNA_CENTER_USERNAME": "devnetuser",
         "DNA_CENTER_PASSWORD": "Cisco123!",
         "DNA_CENTER_VERIFY": "False",
-        "APPINSIGHTS_INSTRUMENTATIONKEY": "295afcd0-dc69-4eb4-85dc-7ec19d3e529f"
       }
     }
 
